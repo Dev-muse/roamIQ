@@ -1,16 +1,16 @@
 export interface Country {
-  name: { common: string; official: string }
-  capital: string[]
-  currencies: Record<string, { name: string; symbol: string }>
-  languages: Record<string, string>
-  region: string
+  names: {
+    common: string
+  }
+  codes: {
+    alpha_2: string
+    alpha_3: string
+  }
   subregion: string
-  population: number
-  flags: { svg: string; png: string; alt: string }
-  latlng: [number, number]
-  cca2: string
-  cca3: string
-  tld: string[]
+  flag: {
+    emoji: string
+    url_svg: string // Add this if you want to use the SVG image
+  }
 }
 
 export interface WeatherWindow {
