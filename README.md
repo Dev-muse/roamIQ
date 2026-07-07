@@ -1,54 +1,96 @@
-# .
+# RoamIQ
 
-This template should help get you started developing with Vue 3 in Vite.
+RoamIQ is a travel intelligence briefing app. Tell it where you're going, when you're traveling, and which passport you hold, and it prepares a destination brief you can reference before you fly.
 
-## Recommended IDE Setup
+## Features
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- **Destination Search** — Debounced, type-ahead country search backed by a live countries API, with clear "no results" feedback for unmatched queries.
+- **Trip Details Form** — Collects departure/return dates and passport country, with live validation (no past departure dates, return date must follow departure, trips capped at 30 days).
+- **Dynamic Briefs** — Selecting a country and submitting the form routes to a per-country brief page (`/brief/:id`).
+- **Saved Trips** — A dedicated view for revisiting previously generated briefs.
 
-## Recommended Browser Setup
+## Tech Stack
 
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd)
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
+- [Vue 3](https://vuejs.org/) (Composition API, `<script setup>`)
+- [TypeScript](https://www.typescriptlang.org/)
+- [Vite](https://vite.dev/) for tooling and dev server
+- [Vue Router](https://router.vuejs.org/) for client-side routing
+- [Pinia](https://pinia.vuejs.org/) for state management
+- [Tailwind CSS](https://tailwindcss.com/) for styling
+- [Vitest](https://vitest.dev/) + [@vue/test-utils](https://test-utils.vuejs.org/) for unit testing
+- [ESLint](https://eslint.org/) / [oxlint](https://oxc.rs/) / [Prettier](https://prettier.io/) for linting and formatting
 
-## Type Support for `.vue` Imports in TS
+## Getting Started
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+### Prerequisites
 
-## Customize configuration
+- Node.js `^22.18.0` or `>=24.12.0`
+- [pnpm](https://pnpm.io/)
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
+### Installation
 
 ```sh
 pnpm install
 ```
 
-### Compile and Hot-Reload for Development
+### Environment Variables
+
+Create a `.env` file at the project root (this file is git-ignored) and provide your own countries API key:
+
+```sh
+VITE_REST_COUNTRIES_KEY=your_api_key_here
+```
+
+### Development
 
 ```sh
 pnpm dev
 ```
 
-### Type-Check, Compile and Minify for Production
+### Type-Check, Build, and Minify for Production
 
 ```sh
 pnpm build
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
+### Preview a Production Build
+
+```sh
+pnpm preview
+```
+
+### Run Unit Tests
 
 ```sh
 pnpm test:unit
 ```
 
-### Lint with [ESLint](https://eslint.org/)
+### Lint
 
 ```sh
 pnpm lint
 ```
+
+## Project Structure
+
+```
+src/
+├── assets/          # Global styles
+├── components/
+│   ├── layout/      # App header/footer
+│   └── ui/          # Shared UI primitives (inputs, etc.)
+├── composables/      # Composition API logic (country search, travel form)
+├── router/           # Route definitions
+├── stores/           # Pinia stores
+├── types/            # Shared TypeScript types
+└── views/            # Route-level pages (Home, Brief, Saved)
+```
+
+## Roadmap
+
+- **AI-Generated Briefs** — Synthesize destination data (weather windows, entry requirements, local context) into a narrative brief using the OpenAI API.
+- **Persisted Saved Trips** — Store generated briefs so the Saved Trips view reflects real trip history instead of a placeholder.
+
+## License
+
+This project currently has no license file; treat it as private/unlicensed until one is added.
